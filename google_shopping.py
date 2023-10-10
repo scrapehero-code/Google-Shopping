@@ -31,8 +31,7 @@ headers = {
  
 def save_as_csv(data):
 	"""
-	The function that used to save
-	the data as as csv file
+	The function that used to save the data as as csv file
  
 	Args:
     	data (list): data as list of dictionary
@@ -59,9 +58,7 @@ def save_as_csv(data):
  
         # Iterating through each product data
         for row in data:
- 
-        # Writing the data in a row
-        writer.writerow(row)
+             writer.writerow(row)
  
  
 def clean_price(input_price):
