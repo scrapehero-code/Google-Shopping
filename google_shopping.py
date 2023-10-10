@@ -37,18 +37,18 @@ def save_as_csv(data):
     	data (list): data as list of dictionary
 	"""
  
-	# Column(field) names for the csv file
-	fieldnames = [
-    	    "title",
-    	    "image_url",
-    	    "rating",
-    	    "website",
-    	    "item_price",
-    	    "url"
-	]
+    # Column(field) names for the csv file
+    fieldnames = [
+        "title",
+    	"image_url",
+    	"rating",
+    	"website",
+    	"item_price",
+    	"url"
+    ]
  
-	# Opening an csv file to save the data
-	with open("outputs.csv", mode="w", newline="") as file:
+    # Opening an csv file to save the data
+    with open("outputs.csv", mode="w", newline="") as file:
  
         # Creating a writer object
         writer = csv.DictWriter(file, fieldnames=fieldnames)
@@ -62,36 +62,36 @@ def save_as_csv(data):
  
  
 def clean_price(input_price):
-	input_price = re.sub(r"[^\d.,]", "", input_price)
-	input_price = float(input_price.replace(",", ""))
-	return input_price
+    input_price = re.sub(r"[^\d.,]", "", input_price)
+    input_price = float(input_price.replace(",", ""))
+    return input_price
  
  
 def parse_listing_page(input_search_term: str):
-	"""
-	This function will generate the listing page url from
-	the input search keyword, Send request to it and extract
-	product URLs from the response.
+    """
+    This function will generate the listing page url from
+    the input search keyword, Send request to it and extract
+    product URLs from the response.
  
-	Args:
-    	input_search_term (string): _description_
+    Args:
+        input_search_term (string): _description_
  
-	Returns:
+    Returns:
     	list: List of extracted product urls
-	"""
+    """
  
-	# Generating the listing page URL
-	url = f"https://www.google.com/search?q={input_search_term}&safe=off&tbm=shop"
+    # Generating the listing page URL
+    url = f"https://www.google.com/search?q={input_search_term}&safe=off&tbm=shop"
  
-	# Sending request to the URL
-	response = requests.get(url=url, headers=headers)
+    # Sending request to the URL
+    response = requests.get(url=url, headers=headers)
  
-	# Parsing the response
-	tree = html.fromstring(response.content)
+    # Parsing the response
+    tree = html.fromstring(response.content)
  
-	# Extracting product URLs
-	product_urls = tree.xpath('//a[@class="xCpuod"]/@href')
-	return product_urls
+    # Extracting product URLs
+    product_urls = tree.xpath('//a[@class="xCpuod"]/@href')
+    return product_urls
  
  
 def parse_product_page(product_urls: list):
@@ -159,7 +159,7 @@ def parse_product_page(product_urls: list):
  
  
 if __name__ == "__main__":
-	input_search_term = "laptop"
-	product_urls = parse_listing_page(input_search_term)
-	data = parse_product_page(product_urls)
-	save_as_csv(data)
+    input_search_term = "laptop"
+    product_urls = parse_listing_page(input_search_term)
+    data = parse_product_page(product_urls)
+    save_as_csv(data)
