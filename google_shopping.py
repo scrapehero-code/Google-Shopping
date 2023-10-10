@@ -30,10 +30,10 @@ headers = {
  
 
 def save_as_csv(data):
-	"""
-	The function that used to save the data as as csv file
+    """
+    The function that used to save the data as as csv file
  
-	Args:
+    Args:
     	data (list): data as list of dictionary
 	"""
  
